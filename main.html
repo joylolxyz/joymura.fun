@@ -1,0 +1,195 @@
+  <!DOCTYPE html>
+  <html lang="en" class="scroll-smooth">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>joymura</title>
+      <link rel="icon" type="image" href="joy.png">
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+          }
+          body {
+              background: black;
+              color: white;
+              line-height: 1.6;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+              text-transform: lowercase;
+          }
+          ::selection {
+              background: #33FF7A;
+              color: black;
+          }
+          .container {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 2rem;
+              padding: 2rem 1rem;
+          }
+          .hero {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              gap: 0.5rem;
+              margin-bottom: 2rem;
+          }
+          .hero img {
+              width: 5rem;
+              height: 5rem;
+              transform: rotate(0deg);
+              object-fit: cover;
+          }
+          .hero p {
+              color: #666;
+              font-size: 0.875rem;
+              max-width: 400px;
+          }
+          .content {
+              display: flex;
+              gap: 1.5rem;
+              width: 100%;
+              max-width: 450px;
+              flex-direction: row;
+          }
+          .image-container {
+              height: 250px;
+              width: 220px;
+              border: 1px solid white;
+              overflow: hidden;
+              position: relative;
+          }
+          .image-container img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              filter: brightness(0.7);
+              transition: all 0.5s;
+          }
+          .image-container:hover img {
+              transform: scale(1.1);
+              filter: brightness(0.2);
+          }
+          .menu {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 1rem;
+              width: 220px;
+              height: 250px;
+              border: 1px solid #1a1a1a;
+              background: rgba(0, 0, 0, 0.8);
+              padding: 1rem;
+          }
+          .menu a {
+              color: white;
+              text-decoration: none;
+              font-size: 0.875rem;
+              padding: 0.5rem;
+              transition: all 0.3s ease;
+              width: fit-content;
+              border: 1px solid transparent;
+              position: relative;
+              overflow: hidden;
+          }
+          .menu a:hover {
+              border: 1px solid #33FF7A;
+              background: transparent;
+              color: #33FF7A;
+          }
+          .menu a:hover::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 200%;
+              height: 200%;
+              background: radial-gradient(circle, rgba(51, 255, 122, 0.1) 0%, rgba(51, 255, 122, 0) 70%);
+              transform: translate(-50%, -50%);
+              animation: pulse 1.5s ease-out infinite;
+          }
+          @keyframes pulse {
+              0% {
+                  transform: translate(-50%, -50%) scale(0.8);
+                  opacity: 1;
+              }
+              100% {
+                  transform: translate(-50%, -50%) scale(1.5);
+                  opacity: 0;
+              }
+          }
+          .footer {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 0.5rem;
+              font-size: 0.75rem;
+              color: #666;
+              margin-top: 0.5rem;
+          }
+          .footer .links {
+              display: flex;
+              gap: 1rem;
+          }
+          .footer a {
+              color: #666;
+              text-decoration: none;
+          }
+          .footer a:hover {
+              color: #33FF7A;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <section class="hero">
+              <img src="joy.png" alt="Logo" class="size-20">
+              <p>this is my personal site where i showcase my past-present groups i work for, and some testimonals</p>
+          </section>
+
+          <div class="content">
+              <div class="image-container">
+                  <img src="lana.png" alt="Illustration">
+              </div>
+              <div class="menu">
+                  <a href="/experiences">experiences</a>
+                  <a href="/testimonals">testimonals</a>
+                  <a href="/work">work</a>
+                  <a href="/contact">contact</a>
+              </div>
+          </div>
+
+          <div class="footer">
+              <div class="links">
+                  <a href="/terms-of-service">terms of service</a>
+                  <span>•</span>
+                  <a href="/privacy-policy">privacy policy</a>
+              </div>
+              <span id="datetime"></span>
+          </div>
+      </div>
+
+      <script>
+          function updateDateTime() {
+              const now = new Date();
+              document.getElementById('datetime').textContent = now.toLocaleString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  hour12: true,
+                  month: 'numeric',
+                  day: 'numeric',
+                  year: 'numeric'
+              });
+          }
+          updateDateTime();
+          setInterval(updateDateTime, 1000);
+      </script>
+  </body>
+  </html>

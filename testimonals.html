@@ -1,0 +1,199 @@
+  <!DOCTYPE html>
+  <html lang="en" class="scroll-smooth">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>testimonals - joymura</title>
+      <link rel="icon" type="image" href="joy.png">
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+          }
+          body {
+              background: black;
+              color: white;
+              line-height: 1.6;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+              text-transform: lowercase;
+          }
+          .container {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 2rem;
+              padding: 2rem 1rem;
+              max-width: 1200px;
+              margin: 0 auto;
+          }
+          .hero {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              gap: 0.5rem;
+              margin-bottom: 2rem;
+          }
+          .hero img {
+              width: 5rem;
+              height: 5rem;
+              transform: rotate(0deg);
+              object-fit: cover;
+          }
+          .testimonial-wrapper {
+              display: flex;
+              gap: 2rem;
+              width: 100%;
+              align-items: stretch;
+          }
+          .testimonial-section {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+          }
+          .testimonial-card {
+              border: 1px solid white;
+              padding: 2rem;
+              width: 100%;
+              margin-bottom: 1rem;
+              flex: 1;
+          }
+          .testimonial-header {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 1rem;
+              color: #666;
+              font-size: 0.875rem;
+          }
+          .testimonial-content {
+              margin-bottom: 1.5rem;
+          }
+          .testimonial-content:last-child {
+              margin-bottom: 0;
+          }
+          .testimonial-author {
+              color: #888;
+              font-style: normal;
+          }
+          .testimonial-footer {
+              color: #666;
+              font-size: 0.875rem;
+          }
+          .footer {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 0.5rem;
+              font-size: 0.75rem;
+              color: #666;
+              margin-top: 0.5rem;
+          }
+          .footer .links {
+              display: flex;
+              gap: 1rem;
+          }
+          .footer a {
+              color: #666;
+              text-decoration: none;
+          }
+          .footer a:hover {
+              color: white;
+          }
+          .back-button {
+              position: absolute;
+              top: 2rem;
+              left: 2rem;
+              color: white;
+              text-decoration: none;
+              font-size: 0.875rem;
+              padding: 0.5rem;
+              border: 1px solid white;
+          }
+          .back-button:hover {
+              background: white;
+              color: black;
+          }
+          .group-label {
+              border: 1px solid #33FF7A;
+              padding: 0.5rem 1rem;
+              margin-bottom: 1rem;
+              font-size: 0.875rem;
+              color: #33FF7A;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <a href="/" class="back-button">back</a>
+      
+          <section class="hero">
+              <img src="joy.png" alt="Logo" class="size-20">
+              <p>testimonials from my clients and partners</p>
+          </section>
+
+          <div class="testimonial-wrapper">
+              <div class="testimonial-section">
+                  <div class="group-label" style="border-color: rgb(99, 189, 201); color: rgb(99, 189, 201);">central medical institute</div>
+                  <div class="testimonial-card">
+                      <div class="testimonial-header">
+                          <span></span>
+                          <span>2024</span>
+                      </div>
+                      <div class="testimonial-content">
+                        <p>"we hate joy"</p>
+                        <p class="testimonial-author">- xm_ahdi, founder</p>
+                    </div>
+                      <div class="testimonial-content">
+                          <p>"we love joy"</p>
+                          <p class="testimonial-author">- cylicia, compliance leadership</p>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="testimonial-section">
+                  <div class="group-label" style="border-color: #FF7979; color: #FF7979;">auahi</div>
+                  <div class="testimonial-card">
+                      <div class="testimonial-header">
+                          <span></span>
+                          <span>2024</span>
+                      </div>
+                      <div class="testimonial-content">
+                          <p>"joy’s work ethic and performance is awesome, they are always here to help in any kind of situation and fast"</p>
+                          <p class="testimonial-author">- mattTKS, owner</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="footer">
+              <div class="links">
+                  <a href="/terms-of-service">terms of service</a>
+                  <span>•</span>
+                  <a href="/privacy-policy">privacy policy</a>
+              </div>
+              <span id="datetime"></span>
+          </div>
+      </div>
+
+      <script>
+          function updateDateTime() {
+              const now = new Date();
+              document.getElementById('datetime').textContent = now.toLocaleString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  hour12: true,
+                  month: 'numeric',
+                  day: 'numeric',
+                  year: 'numeric'
+              });
+          }
+          updateDateTime();
+          setInterval(updateDateTime, 1000);
+      </script>
+  </body>
+  </html>

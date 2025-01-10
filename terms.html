@@ -1,0 +1,256 @@
+  <!DOCTYPE html>
+  <html lang="en" class="scroll-smooth">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>terms of service - joymura</title>
+      <link rel="icon" type="image" href="joy.png">
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+          }
+          body {
+              background: black;
+              color: white;
+              line-height: 1.6;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+              text-transform: lowercase;
+          }
+          ::selection {
+              background: #33FF7A;
+              color: black;
+          }
+          .container {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 2rem;
+              padding: 2rem 1rem;
+              max-width: 800px;
+              margin: 0 auto;
+              position: relative;
+          }
+          .hero {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-align: center;
+              gap: 0.5rem;
+              margin-bottom: 2rem;
+          }
+          .hero img {
+              width: 5rem;
+              height: 5rem;
+              transform: rotate(0deg);
+              object-fit: cover;
+          }
+          .terms-content {
+              border: 1px solid #1a1a1a;
+              padding: 2rem;
+              width: 100%;
+          }
+          .terms-section {
+              margin-bottom: 2rem;
+          }
+          .terms-section:last-child {
+              margin-bottom: 0;
+          }
+          .section-title {
+              color: #33FF7A;
+              font-size: 1rem;
+              margin-bottom: 1rem;
+              border-bottom: 1px solid #33FF7A;
+              padding-bottom: 0.5rem;
+          }
+          .terms-text {
+              color: #888;
+              font-size: 0.875rem;
+              margin-bottom: 1rem;
+          }
+          .back-button {
+              position: fixed;
+              top: 2rem;
+              left: 2rem;
+              color: white;
+              text-decoration: none;
+              font-size: 0.875rem;
+              padding: 0.5rem;
+              transition: all 0.3s ease;
+              border: 1px solid transparent;
+              overflow: hidden;
+          }
+          .back-button:hover {
+              border: 1px solid #33FF7A;
+              background: transparent;
+              color: #33FF7A;
+          }
+          .back-button:hover::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 200%;
+              height: 200%;
+              background: radial-gradient(circle, rgba(51, 255, 122, 0.1) 0%, rgba(51, 255, 122, 0) 70%);
+              transform: translate(-50%, -50%);
+              animation: pulse 1.5s ease-out infinite;
+          }
+          @keyframes pulse {
+              0% {
+                  transform: translate(-50%, -50%) scale(0.8);
+                  opacity: 1;
+              }
+              100% {
+                  transform: translate(-50%, -50%) scale(1.5);
+                  opacity: 0;
+              }
+          }
+          .footer {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 0.5rem;
+              font-size: 0.75rem;
+              color: #666;
+              margin-top: 0.5rem;
+          }
+          .footer .links {
+              display: flex;
+              gap: 1rem;
+          }
+          .footer a {
+              color: #666;
+              text-decoration: none;
+          }
+          .footer a:hover {
+              color: #33FF7A;
+          }
+          .agreement {
+              margin-top: 1rem;
+              text-align: center;
+          }
+          .agreement label {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 0.5rem;
+              cursor: pointer;
+              color: #888;
+          }
+          .agreement input[type="checkbox"] {
+              appearance: none;
+              -webkit-appearance: none;
+              width: 1.2rem;
+              height: 1.2rem;
+              border: 2px solid #33FF7A;
+              border-radius: 3px;
+              cursor: pointer;
+              position: relative;
+              background: transparent;
+          }
+          .agreement input[type="checkbox"]:checked {
+              background: #33FF7A;
+          }
+          .agreement input[type="checkbox"]:checked::after {
+              content: '✓';
+              position: absolute;
+              color: black;
+              font-size: 0.8rem;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+          }
+          .agreement-message {
+              color: #33FF7A;
+              margin-top: 0.5rem;
+              font-size: 0.875rem;
+              display: none;
+          }
+      </style>
+  </head>
+  <body>
+      <div class="container">
+          <a href="/" class="back-button">back</a>
+
+          <section class="hero">
+              <img src="joy.png" alt="Logo">
+              <p>terms of service</p>
+          </section>
+
+          <div class="terms-content">
+              <div class="terms-section">
+                  <div class="section-title">services</div>
+                  <p class="terms-text">I currently work with HR Network and may consider additional projects depending on my availability and interest. My services include Discord management, development, and consulting.</p>
+              </div>
+
+              <div class="terms-section">
+                  <div class="section-title">availability</div>
+                  <p class="terms-text">I am based in the GMT timezone. I will consider each project request individually based on my current workload and interests. My working hours and response times are flexible to accommodate different needs.</p>
+              </div>
+
+              <div class="terms-section">
+                  <div class="section-title">contracts</div>
+                  <p class="terms-text">I am willing to sign contracts and NDAs when necessary. All terms are negotiable and will be clearly agreed upon before starting any work.</p>
+              </div>
+
+              <div class="terms-section">
+                  <div class="section-title">payment</div>
+                  <p class="terms-text">I sometimes take on free projects for communities or groups that interest me. For paid work, payment terms will be agreed upon before starting. All fees are non-refundable unless specifically stated in writing.</p>
+              </div>
+
+              <div class="terms-section">
+                  <div class="section-title">intellectual property</div>
+                  <p class="terms-text">All code, designs, and materials I create are protected by copyright. Using my work without explicit written permission will result in DMCA takedown notices. Rights can only be transferred through written agreement.</p>
+              </div>
+
+              <div class="agreement">
+                  <label>
+                      <input type="checkbox" id="agreementCheckbox">
+                      i solemnly swear that i definitely read all of this (trust)
+                  </label>
+                  <div id="agreementMessage" class="agreement-message">wow you're actually honest</div>
+              </div>
+          </div>
+
+          <div class="footer">
+              <div class="links">
+                  <a href="/terms-of-service">terms of service</a>
+                  <span>•</span>
+                  <a href="/privacy-policy">privacy policy</a>
+              </div>
+              <span id="datetime"></span>
+          </div>
+      </div>
+
+      <script>
+          function updateDateTime() {
+              const now = new Date();
+              document.getElementById('datetime').textContent = now.toLocaleString('en-US', {
+                  hour: 'numeric',
+                  minute: 'numeric',
+                  second: 'numeric',
+                  hour12: true,
+                  month: 'numeric',
+                  day: 'numeric',
+                  year: 'numeric'
+              });
+          }
+          updateDateTime();
+          setInterval(updateDateTime, 1000);
+
+          document.getElementById('agreementCheckbox').addEventListener('change', function() {
+              const message = document.getElementById('agreementMessage');
+              if (this.checked) {
+                  message.style.display = 'block';
+              } else {
+                  message.style.display = 'none';
+              }
+          });
+      </script>
+  </body>
+  </html>
