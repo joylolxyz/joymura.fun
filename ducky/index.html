@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ducky - Homepage</title>
     <link rel="icon" type="image/x-icon" href="https://duckybot.xyz/images/Ducky.svg">
     <meta name="description" content="Power your server with Ducky, a multi-purpose discord bot focused on moderating your Discord and ER:LC server.">
@@ -16,13 +16,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" onerror="alert('CSS failed to load. Please refresh the page.')">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="/">
-                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky" style="height:32px;">
+                <a href="/" class="logo-hover">
+                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky" style="height:32px; width:auto;">
                 </a>
                 <div class="nav-links" id="navLinks"></div>
             </div>
@@ -31,17 +32,17 @@
 
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content" data-aos="fade-up">
                 <div class="hero-text">
                     <h1>Elevate Your Server with <span class="highlight">Ducky</span></h1>
                     <p>A multi-purpose Discord bot designed for moderation, ER:LC integration, and seamless automation.</p>
                     <div class="hero-buttons">
-                        <a href="/invite" class="btn btn-primary">Invite Ducky</a>
-                        <a href="/support" class="btn btn-secondary">Get Support</a>
+                        <a href="/invite" class="btn btn-primary pulse-animation">Invite Ducky</a>
+                        <a href="/support" class="btn btn-secondary hover-float">Get Support</a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky Hero Image">
+                <div class="hero-image" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky Hero Image" class="floating-animation" loading="lazy">
                 </div>
             </div>
         </div>
@@ -49,46 +50,75 @@
 
     <section class="features">
         <div class="container">
-            <h2 class="section-title">Why Choose <span class="highlight">Ducky</span>?</h2>
-            <div class="grid" id="featuresGrid"></div>
+            <h2 class="section-title" data-aos="fade-up">Why Choose <span class="highlight">Ducky</span>?</h2>
+            <div class="grid" id="featuresGrid" data-aos="fade-up" data-aos-delay="200"></div>
         </div>
     </section>
 
     <section class="stats">
         <div class="container">
-            <h2 class="section-title">Trusted by Communities Worldwide</h2>
+            <h2 class="section-title" data-aos="fade-up">Trusted by Communities Worldwide</h2>
             <div class="grid">
-                <div class="card stat-card">
-                    <h3 id="serverCount">930+</h3>
+                <div class="card stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 id="serverCount" class="counter">930+</h3>
                     <p>Discord Servers</p>
                 </div>
-                <div class="card stat-card">
-                    <h3 id="userCount">124K+</h3>
+                <div class="card stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 id="userCount" class="counter">124K+</h3>
                     <p>Members Managed</p>
                 </div>
-                <div class="card stat-card">
-                    <h3 id="linkCount">800+</h3>
+                <div class="card stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3 id="linkCount" class="counter">800+</h3>
                     <p>Roblox Links</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="cta-section">
+        <div class="container">
+            <h2 data-aos="fade-up">Ready to Supercharge Your Server?</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Join the growing community of Ducky users and unlock your server's full potential.</p>
+            <a href="/plus" class="btn btn-primary glow-animation" data-aos="fade-up" data-aos-delay="200">Upgrade to Ducky Plus+</a>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-links" id="footerLinks">
+                <div class="footer-links" id="footerLinks" data-aos="fade-up">
                 </div>
-                <div class="social-links" id="socialLinks">
+                <div class="social-links" id="socialLinks" data-aos="fade-up" data-aos-delay="100">
                 </div>
-                <div class="copyright">
+                <div class="copyright" data-aos="fade-up" data-aos-delay="200">
                     <p>© 2025 Ducky. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/config.js" onerror="alert('JavaScript failed to load. Please refresh the page.')"></script>
-    <script src="js/main.js" onerror="alert('JavaScript failed to load. Please refresh the page.')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100,
+                disable: window.innerWidth < 768
+            });
+
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuToggle.setAttribute('aria-expanded', 
+                    menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+                );
+            });
+        });
+    </script>
+    <script src="js/config.js" defer onerror="alert('JavaScript failed to load. Please refresh the page.')"></script>
+    <script src="js/main.js" defer onerror="alert('JavaScript failed to load. Please refresh the page.')"></script>
 </body>
 </html>
