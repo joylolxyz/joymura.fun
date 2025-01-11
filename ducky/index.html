@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Ducky - Homepage</title>
     <link rel="icon" type="image/x-icon" href="https://duckybot.xyz/images/Ducky.svg">
     <meta name="description" content="Power your server with Ducky, a multi-purpose discord bot focused on moderating your Discord and ER:LC server.">
@@ -11,21 +11,28 @@
     <meta content="https://duckybot.xyz/" property="og:url">
     <meta content="https://duckybot.xyz/images/Ducky.webp" property="og:image">
     <meta content="#F5FF82" data-react-helmet="true" name="theme-color">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" onerror="alert('CSS failed to load. Please refresh the page.')">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <div class="nav-content">
                 <a href="/" class="logo-hover">
-                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky" style="height:32px; width:auto;">
+                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky" width="32" height="32" loading="eager">
                 </a>
-                <div class="nav-links" id="navLinks"></div>
+                <button id="menuToggle" class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="hamburger"></span>
+                </button>
+                <div class="nav-links" id="navLinks" role="navigation"></div>
             </div>
         </div>
     </nav>
@@ -37,12 +44,15 @@
                     <h1>Elevate Your Server with <span class="highlight">Ducky</span></h1>
                     <p>A multi-purpose Discord bot designed for moderation, ER:LC integration, and seamless automation.</p>
                     <div class="hero-buttons">
-                        <a href="/invite" class="btn btn-primary pulse-animation">Invite Ducky</a>
-                        <a href="/support" class="btn btn-secondary hover-float">Get Support</a>
+                        <a href="/invite" class="btn btn-primary pulse-animation" role="button">Invite Ducky</a>
+                        <a href="/support" class="btn btn-secondary hover-float" role="button">Get Support</a>
                     </div>
                 </div>
                 <div class="hero-image" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky Hero Image" class="floating-animation" loading="lazy">
+                    <picture>
+                        <source srcset="https://duckybot.xyz/images/Ducky.webp" type="image/webp">
+                        <img src="https://duckybot.xyz/images/Ducky.svg" alt="Ducky Hero Image" class="floating-animation" loading="lazy" width="300" height="300">
+                    </picture>
                 </div>
             </div>
         </div>
@@ -79,17 +89,15 @@
         <div class="container">
             <h2 data-aos="fade-up">Ready to Supercharge Your Server?</h2>
             <p data-aos="fade-up" data-aos-delay="100">Join the growing community of Ducky users and unlock your server's full potential.</p>
-            <a href="/plus" class="btn btn-primary glow-animation" data-aos="fade-up" data-aos-delay="200">Upgrade to Ducky Plus+</a>
+            <a href="/plus" class="btn btn-primary glow-animation" data-aos="fade-up" data-aos-delay="200" role="button">Upgrade to Ducky Plus+</a>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-links" id="footerLinks" data-aos="fade-up">
-                </div>
-                <div class="social-links" id="socialLinks" data-aos="fade-up" data-aos-delay="100">
-                </div>
+                <div class="footer-links" id="footerLinks" data-aos="fade-up"></div>
+                <div class="social-links" id="socialLinks" data-aos="fade-up" data-aos-delay="100"></div>
                 <div class="copyright" data-aos="fade-up" data-aos-delay="200">
                     <p>© 2025 Ducky. All rights reserved.</p>
                 </div>
@@ -99,22 +107,72 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
     <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             AOS.init({
                 duration: 800,
                 once: true,
-                offset: 100,
+                offset: 50,
                 disable: window.innerWidth < 768
             });
 
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
+            let touchStartY = 0;
             
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                menuToggle.setAttribute('aria-expanded', 
-                    menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
-                );
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    menuToggle.setAttribute('aria-expanded', 
+                        menuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+                    );
+                });
+
+                navLinks.addEventListener('touchstart', (e) => {
+                    touchStartY = e.touches[0].clientY;
+                }, { passive: true });
+
+                navLinks.addEventListener('touchmove', (e) => {
+                    const touchEndY = e.touches[0].clientY;
+                    const diff = touchStartY - touchEndY;
+                    
+                    if (diff > 50) { // Swipe up to close
+                        navLinks.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }, { passive: true });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (navLinks.classList.contains('active') && 
+                    !navLinks.contains(e.target) && 
+                    !menuToggle.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                }, 250);
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
         });
     </script>
