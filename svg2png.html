@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#33FF7A">
+    <meta name="description" content="convert svg to png with ease.">
+    <title>svg2png</title>
+    <link rel="icon" type="image" href="joy.png">
+    <script src="https://kit.fontawesome.com/ffc88a1c53.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        }
+        body {
+            background: black;
+            color: white;
+            line-height: 1.6;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            text-transform: lowercase;
+        }
+        ::selection {
+            background: #33FF7A;
+            color: black;
+        }
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem 1rem;
+        }
+        .controls, .preview-container {
+            width: 45%;
+            max-width: 600px;
+            min-width: 300px;
+            margin: 1rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #1a1a1a;
+            display: center;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            vertical-align: top;
+            min-height: 500px;
+        }
+        .preview-container {
+            width: 35%;
+            max-width: 400px;
+            display: none;
+            justify-content: space-between;
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 1px solid #1a1a1a;
+            background: black;
+            color: white;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            box-sizing: border-box;
+            resize: none;
+            text-align: center;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            height: auto;
+            overflow: hidden;
+        }
+        textarea:focus {
+            border: 1px solid #33FF7A;
+            outline: none;
+        }
+        .button-assets {
+            color: white;
+            text-decoration: none;
+            font-size: 0.875rem;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button-assets:hover {
+            border: 1px solid #33FF7A;
+            background: transparent;
+            color: #33FF7A;
+        }
+        .button-assets:hover::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(51, 255, 122, 0.1) 0%, rgba(51, 255, 122, 0) 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s ease-out infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+        .control-group {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            align-items: center;
+            white-space: nowrap;
+            width: 100%;
+        }
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        input[type="number"], input[type="text"] {
+            background: black;
+            color: white;
+            border: 1px solid #1a1a1a;
+            padding: 0.5rem;
+            width: 80px;
+            text-align: center;
+        }
+        input[type="color"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            background: none;
+        }
+        input:focus {
+            border-color: #33FF7A;
+            outline: none;
+        }
+        label {
+            color: #666;
+        }
+        canvas {
+            max-width: 100%;
+            max-height: 100%;
+            background: black;
+            border: 1px solid #1a1a1a;
+        }
+        h1 {
+            color: #33FF7A;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #666;
+        }
+        #download {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h1><i class="fa-solid fa-image" style="color: #33FF7A;"></i> svg2png</h1>
+            <p>convert your svg to png with ease</p>
+            <textarea id="svgInput" placeholder="paste it here, if using fontawesome paste entire svg code" oninput="autoResize(this); convertToPNG()"></textarea>
+      
+            <div class="control-group">
+                <div class="control-item">
+                    <label for="iconColor">color:</label>
+                    <input type="color" id="iconColor" value="#ffffff" oninput="updateHexInput(this.value)">
+                    <input type="text" id="hexInput" value="#ffffff" oninput="updateColorPicker(this.value)">
+                </div>
+                <div class="control-item">
+                    <label for="width">width:</label>
+                    <input type="number" id="width" value="512" min="1" oninput="convertToPNG()">
+                </div>
+                <div class="control-item">
+                    <label for="height">height:</label>
+                    <input type="number" id="height" value="512" min="1" oninput="convertToPNG()">
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-container">
+            <div id="preview"></div>
+            <div id="download">
+                <a download="icon.png" href="#" class="button-assets">
+                    <i class="fa-solid fa-download" style="color: #33FF7A; margin-right: 8px;"></i>download
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function updateHexInput(color) {
+            document.getElementById('hexInput').value = color;
+            convertToPNG();
+        }
+
+        function updateColorPicker(hex) {
+            if (/^#[0-9A-F]{6}$/i.test(hex)) {
+                document.getElementById('iconColor').value = hex;
+                convertToPNG();
+            }
+        }
+
+        function getIconNameFromSVG(svgCode) {
+            const match = svgCode.match(/class="[^"]*fa-([^"\s]+)/);
+            return match ? match[1] : 'icon';
+        }
+
+        function convertToPNG() {
+            const svgCode = document.getElementById('svgInput').value;
+            const preview = document.getElementById('preview');
+            const download = document.getElementById('download');
+            const previewContainer = document.querySelector('.preview-container');
+            const iconColor = document.getElementById('iconColor').value;
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+      
+            if (!svgCode) {
+                preview.innerHTML = '';
+                download.style.display = 'none';
+                previewContainer.style.display = 'none';
+                return;
+            }
+      
+            const iconName = getIconNameFromSVG(svgCode);
+      
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = svgCode;
+            const svg = tempDiv.querySelector('svg');
+      
+            if (!svg) {
+                preview.innerHTML = '';
+                download.style.display = 'none';
+                previewContainer.style.display = 'none';
+                return;
+            }
+
+            previewContainer.style.display = 'inline-flex';
+
+            if (!svg.getAttribute('viewBox')) {
+                svg.setAttribute('viewBox', '0 0 512 512');
+            }
+
+            svg.style.fill = iconColor;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const img = new Image();
+      
+            canvas.width = width;
+            canvas.height = height;
+      
+            const blob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+            const url = URL.createObjectURL(blob);
+      
+            img.onload = function() {
+                ctx.fillStyle = 'transparent';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+                const svgWidth = svg.viewBox.baseVal.width;
+                const svgHeight = svg.viewBox.baseVal.height;
+                const scale = Math.min(width / svgWidth, height / svgHeight);
+                const drawWidth = svgWidth * scale;
+                const drawHeight = svgHeight * scale;
+                const x = (width - drawWidth) / 2;
+                const y = (height - drawHeight) / 2;
+          
+                ctx.drawImage(img, x, y, drawWidth, drawHeight);
+          
+                preview.innerHTML = '';
+                preview.appendChild(canvas);
+          
+                download.style.display = 'block';
+                const downloadLink = download.querySelector('a');
+                downloadLink.href = canvas.toDataURL('image/png');
+                downloadLink.download = `${iconName}.png`;
+          
+                URL.revokeObjectURL(url);
+            };
+      
+            img.src = url;
+        }
+    </script>
+</body>
+</html>
