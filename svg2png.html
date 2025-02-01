@@ -7,20 +7,19 @@
     <meta name="description" content="convert svg to png with ease.">
     <title>svg2png</title>
     <link rel="icon" type="image" href="joy.png">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/ffc88a1c53.js" crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-family: 'Satoshi', sans-serif;
         }
         body {
-            background: black;
+            background: #0a0a0a;
             color: white;
-            line-height: 1.6;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-            text-transform: lowercase;
+            line-height: 1.7;
         }
         ::selection {
             background: #33FF7A;
@@ -29,103 +28,97 @@
         .container {
             min-height: 100vh;
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            padding: 2rem 1rem;
+            padding: 2rem;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(51, 255, 122, 0.02) 0%, rgba(0, 0, 0, 0) 100%);
         }
         .controls, .preview-container {
-            width: 45%;
+            width: 100%;
             max-width: 600px;
-            min-width: 300px;
-            margin: 1rem;
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #1a1a1a;
-            display: center;
+            height: fit-content;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            vertical-align: top;
-            min-height: 500px;
         }
         .preview-container {
-            width: 35%;
-            max-width: 400px;
             display: none;
             justify-content: space-between;
         }
         textarea {
             width: 100%;
-            min-height: 150px;
+            height: 150px;
             margin: 1rem 0;
             padding: 1rem;
-            border: 1px solid #1a1a1a;
-            background: black;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
             color: white;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-            box-sizing: border-box;
+            font-family: 'Satoshi', monospace;
             resize: none;
-            text-align: center;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            height: auto;
-            overflow: hidden;
+            font-size: 14px;
+            border-radius: 12px;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+        textarea::-webkit-scrollbar {
+            width: 8px;
+            margin-right: 4px;
+        }
+        textarea::-webkit-scrollbar-track {
+            background: transparent;
+            margin: 8px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background: rgba(51, 255, 122, 0.3);
+            border-radius: 10px;
+        }
+        textarea::-webkit-scrollbar-thumb:hover {
+            background: rgba(51, 255, 122, 0.5);
         }
         textarea:focus {
             border: 1px solid #33FF7A;
             outline: none;
         }
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
         .button-assets {
             color: white;
             text-decoration: none;
-            font-size: 0.875rem;
-            padding: 0.5rem;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            padding: 0.75rem 1.25rem;
             width: 100%;
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
+            border: 1px solid rgba(51, 255, 122, 0.2);
+            border-radius: 12px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            min-height: 48px;
+            background: rgba(51, 255, 122, 0.1);
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
         .button-assets:hover {
-            border: 1px solid #33FF7A;
-            background: transparent;
-            color: #33FF7A;
+            background: rgba(51, 255, 122, 0.2);
+            transform: translateY(-2px);
         }
-        .button-assets:hover::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(51, 255, 122, 0.1) 0%, rgba(51, 255, 122, 0) 70%);
-            transform: translate(-50%, -50%);
-            animation: pulse 1.5s ease-out infinite;
-        }
-        @keyframes pulse {
-            0% {
-                transform: translate(-50%, -50%) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.5);
-                opacity: 0;
-            }
+        .button-assets:active {
+            transform: translateY(1px);
         }
         .control-group {
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             display: flex;
-            justify-content: center;
             gap: 1.5rem;
             align-items: center;
-            white-space: nowrap;
             width: 100%;
+            justify-content: center;
         }
         .control-item {
             display: flex;
@@ -133,46 +126,82 @@
             gap: 0.75rem;
         }
         input[type="number"], input[type="text"] {
-            background: black;
+            background: rgba(0, 0, 0, 0.2);
             color: white;
-            border: 1px solid #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0.5rem;
-            width: 80px;
+            width: 100px;
             text-align: center;
+            font-size: 14px;
+            height: 48px;
+            border-radius: 10px;
         }
         input[type="color"] {
             -webkit-appearance: none;
             appearance: none;
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             padding: 0;
             border: none;
             cursor: pointer;
             background: none;
+            border-radius: 10px;
         }
         input:focus {
             border-color: #33FF7A;
             outline: none;
         }
         label {
-            color: #666;
+            color: #999;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
         }
         canvas {
             max-width: 100%;
             max-height: 100%;
-            background: black;
-            border: 1px solid #1a1a1a;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
         }
         h1 {
             color: #33FF7A;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 2rem;
+            font-weight: 700;
         }
         p {
-            color: #666;
+            color: #999;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
         }
         #download {
             width: 100%;
             text-align: center;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .controls, .preview-container {
+                height: auto;
+                min-height: auto;
+                max-width: 100%;
+            }
+            .control-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .control-item {
+                width: 100%;
+                justify-content: space-between;
+            }
+            h1 {
+                font-size: 1.75rem;
+            }
         }
     </style>
 </head>
@@ -181,8 +210,8 @@
         <div class="controls">
             <h1><i class="fa-solid fa-image" style="color: #33FF7A;"></i> svg2png</h1>
             <p>convert your svg to png with ease</p>
-            <textarea id="svgInput" placeholder="paste it here, if using fontawesome paste entire svg code" oninput="autoResize(this); convertToPNG()"></textarea>
-      
+            <textarea id="svgInput" placeholder="paste your svg code here..." oninput="debounce(convertToPNG, 100)()"></textarea>
+  
             <div class="control-group">
                 <div class="control-item">
                     <label for="iconColor">color:</label>
@@ -191,40 +220,46 @@
                 </div>
                 <div class="control-item">
                     <label for="width">width:</label>
-                    <input type="number" id="width" value="512" min="1" oninput="convertToPNG()">
+                    <input type="number" id="width" value="512" min="1" oninput="debounce(convertToPNG, 100)()">
                 </div>
                 <div class="control-item">
                     <label for="height">height:</label>
-                    <input type="number" id="height" value="512" min="1" oninput="convertToPNG()">
+                    <input type="number" id="height" value="512" min="1" oninput="debounce(convertToPNG, 100)()">
                 </div>
             </div>
         </div>
-
         <div class="preview-container">
             <div id="preview"></div>
             <div id="download">
                 <a download="icon.png" href="#" class="button-assets">
-                    <i class="fa-solid fa-download" style="color: #33FF7A; margin-right: 8px;"></i>download
+                    <i class="fa-solid fa-download" style="color: #33FF7A; margin-right: 8px;"></i>download png
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        function autoResize(textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         }
 
         function updateHexInput(color) {
             document.getElementById('hexInput').value = color;
-            convertToPNG();
+            debounce(convertToPNG, 100)();
         }
 
         function updateColorPicker(hex) {
             if (/^#[0-9A-F]{6}$/i.test(hex)) {
                 document.getElementById('iconColor').value = hex;
-                convertToPNG();
+                debounce(convertToPNG, 100)();
             }
         }
 
@@ -241,20 +276,20 @@
             const iconColor = document.getElementById('iconColor').value;
             const width = parseInt(document.getElementById('width').value);
             const height = parseInt(document.getElementById('height').value);
-      
+  
             if (!svgCode) {
                 preview.innerHTML = '';
                 download.style.display = 'none';
                 previewContainer.style.display = 'none';
                 return;
             }
-      
+  
             const iconName = getIconNameFromSVG(svgCode);
-      
+  
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = svgCode;
             const svg = tempDiv.querySelector('svg');
-      
+  
             if (!svg) {
                 preview.innerHTML = '';
                 download.style.display = 'none';
@@ -274,17 +309,17 @@
             const ctx = canvas.getContext('2d');
             const svgData = new XMLSerializer().serializeToString(svg);
             const img = new Image();
-      
+  
             canvas.width = width;
             canvas.height = height;
-      
+  
             const blob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
             const url = URL.createObjectURL(blob);
-      
+  
             img.onload = function() {
                 ctx.fillStyle = 'transparent';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
+      
                 const svgWidth = svg.viewBox.baseVal.width;
                 const svgHeight = svg.viewBox.baseVal.height;
                 const scale = Math.min(width / svgWidth, height / svgHeight);
@@ -292,20 +327,20 @@
                 const drawHeight = svgHeight * scale;
                 const x = (width - drawWidth) / 2;
                 const y = (height - drawHeight) / 2;
-          
+      
                 ctx.drawImage(img, x, y, drawWidth, drawHeight);
-          
+      
                 preview.innerHTML = '';
                 preview.appendChild(canvas);
-          
+      
                 download.style.display = 'block';
                 const downloadLink = download.querySelector('a');
                 downloadLink.href = canvas.toDataURL('image/png');
                 downloadLink.download = `${iconName}.png`;
-          
+      
                 URL.revokeObjectURL(url);
             };
-      
+  
             img.src = url;
         }
     </script>
