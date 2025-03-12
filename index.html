@@ -1,14 +1,9 @@
-<!doctypehtml><html class=scroll-smooth lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"name=viewport><meta content="joy's personal website"name=description><meta content=joy property=og:title><meta content="joy's personal website"property=og:description><meta content=https://joymura.lol/jennie.png property=og:image><meta content=website property=og:type><meta content=#FF3333 property=theme-color><meta content=black-translucent name=apple-mobile-web-app-status-bar-style><meta name="apple-mobile-web-app-capable" content="yes"><title>joy</title><link href=jennie.png rel=icon type=image><style>*{margin:0;padding:0;box-sizing:border-box;font-family:monospace;-webkit-tap-highlight-color:transparent}body{background:#0a0a0a;color:#fff;line-height:1.6;text-transform:lowercase;overscroll-behavior:none}::selection{background:#f33;color:#fff}#entrance-overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;justify-content:center;align-items:center;z-index:1000;cursor:pointer;opacity:1;transition:.5s}.container{min-height:100vh;min-height:-webkit-fill-available;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem;padding:2rem 1rem;background:linear-gradient(45deg,rgba(255,0,0,.1),rgba(0,0,0,.9));opacity:0;transition:opacity 1s ease;text-align:center}.container.visible{opacity:1}.content{display:flex;gap:1.5rem;width:100%;max-width:450px;margin:0 auto;justify-content:center}.image-container{height:250px;width:220px;border:1px solid #f33;overflow:hidden;position:relative;box-shadow:0 0 20px rgba(255,51,51,.2)}.image-container img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) sepia(.3) hue-rotate(-20deg);transition:.5s}.menu{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;width:220px;height:250px;border:1px solid #f33;background:rgba(0,0,0,.8);padding:1rem;backdrop-filter:blur(5px)}.menu a{color:#fff;text-decoration:none;padding:.5rem;transition:.3s;border:1px solid transparent;touch-action:manipulation}.menu a:hover,.menu a:active{border-color:#f33;color:#f33}.music-player{width:100%;max-width:450px;background:rgba(0,0,0,.8);border:1px solid #f33;padding:1rem;margin:0 auto;text-align:center}.controls{display:flex;justify-content:center;gap:1rem;margin:1rem 0}.progress-bar{width:100%;height:4px;background:rgba(255,51,51,.2);margin:1rem 0;cursor:pointer}.progress{width:0;height:100%;background:#f33;transition:.1s}button{background:0 0;border:1px solid #f33;color:#f33;padding:.5rem 1rem;cursor:pointer;transition:.3s;min-width:80px;text-align:center;touch-action:manipulation}button:hover,button:active{background:#f33;color:#fff}.footer{display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.75rem;color:#f33;margin:0 auto;text-align:center}.footer a{color:#f33;text-decoration:none;transition:.3s}.footer a:hover,.footer a:active{color:#fff;text-shadow:0 0 10px #f33}@media (max-width:768px){.music-player{display:block;margin-top:2rem}.content{flex-direction:column;align-items:center}.menu{width:100%;max-width:220px}button{padding:.75rem 1.5rem;font-size:1rem}.progress-bar{height:6px}}</style><div id=entrance-overlay><button>click anywhere to enter, or here</button></div><div class=container><div class=content><div class=image-container><img alt=jennie src=jennie.jpg></div><div class=menu><a href=https://www.snapchat.com/add/joyclenlols>snap</a> <a href=https://www.instagram.com/joyclennss>instagram</a> <a href=https://www.roblox.com/users/484042508/profile>roblox</a> <a href=https://discord.com/users/1057310810440994967>discord</a></div></div><div class=music-player><div class=song-info><h3 id=current-song>cant fetch songs</h3><p id=current-time>0:00 / 0:00</div><div class=progress-bar id=progress-bar><div class=progress id=progress></div></div><div class=controls><button id=prev>prev</button> <button id=play>play</button> <button id=next>next</button></div></div><div class=footer><div class=links><a href=/404>terms of service</a> <span>•</span> <a href=/404>privacy policy</a></div><span id=datetime></span></div></div><script>const updateDateTime = () => {
+<!doctypehtml><html class=scroll-smooth lang=en><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><meta content="joy's personal website"name=description><meta content=joy property=og:title><meta content="joy's personal website"property=og:description><meta content=https://joymura.lol/jennie.png property=og:image><meta content=website property=og:type><meta content=#FF3333 property=theme-color><meta content=black-translucent name=apple-mobile-web-app-status-bar-style><title>joy</title><link href=jennie.png rel=icon type=image><style>*{margin:0;padding:0;box-sizing:border-box;font-family:monospace}body{background:#0a0a0a;color:#fff;line-height:1.6;text-transform:lowercase}::selection{background:#f33;color:#fff}#entrance-overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;justify-content:center;align-items:center;z-index:1000;cursor:pointer;opacity:1;transition:.5s}.container{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem;padding:2rem 1rem;background:linear-gradient(45deg,rgba(255,0,0,.1),rgba(0,0,0,.9));opacity:0;transition:opacity 1s ease;text-align:center}.container.visible{opacity:1}.content{display:flex;gap:1.5rem;width:100%;max-width:450px;margin:0 auto;justify-content:center}.image-container{height:250px;width:220px;border:1px solid #f33;overflow:hidden;position:relative;box-shadow:0 0 20px rgba(255,51,51,.2)}.image-container img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) sepia(.3) hue-rotate(-20deg);transition:.5s}.menu{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;width:220px;height:250px;border:1px solid #f33;background:rgba(0,0,0,.8);padding:1rem;backdrop-filter:blur(5px)}.menu a{color:#fff;text-decoration:none;padding:.5rem;transition:.3s;border:1px solid transparent}.menu a:hover{border-color:#f33;color:#f33}.music-player{width:100%;max-width:450px;background:rgba(0,0,0,.8);border:1px solid #f33;padding:1rem;margin:0 auto;text-align:center}.controls{display:flex;justify-content:center;gap:1rem;margin:1rem 0}.progress-bar{width:100%;height:4px;background:rgba(255,51,51,.2);margin:1rem 0;cursor:pointer}.progress{width:0;height:100%;background:#f33;transition:.1s}button{background:0 0;border:1px solid #f33;color:#f33;padding:.5rem 1rem;cursor:pointer;transition:.3s;min-width:80px;text-align:center}button:hover{background:#f33;color:#fff}.footer{display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.75rem;color:#f33;margin:0 auto;text-align:center}.footer a{color:#f33;text-decoration:none;transition:.3s}.footer a:hover{color:#fff;text-shadow:0 0 10px #f33}@media (max-width:768px){.music-player{display:block;margin-top:2rem}.content{flex-direction:column;align-items:center}.menu{width:100%;max-width:220px}}</style><div id=entrance-overlay><button>click anywhere to enter, or here</button></div><div class=container><div class=content><div class=image-container><img alt=jennie src=jennie.png></div><div class=menu><a href=https://www.snapchat.com/add/joyclenlols>snap</a> <a href=https://www.instagram.com/joyclennss>instagram</a> <a href=https://www.roblox.com/users/484042508/profile>roblox</a> <a href=https://discord.com/users/1057310810440994967>discord</a></div></div><div class=music-player><div class=song-info><h3 id=current-song>cant fetch songs</h3><p id=current-time>0:00 / 0:00</div><div class=progress-bar id=progress-bar><div class=progress id=progress></div></div><div class=controls><button id=prev>prev</button> <button id=play>play</button> <button id=next>next</button></div></div><div class=footer><div class=links><a href=/404>terms of service</a> <span>•</span> <a href=/404>privacy policy</a></div><span id=datetime></span></div></div><script>const updateDateTime = () => {
     document.getElementById('datetime').textContent = new Date().toLocaleString('en-GB', {
         hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false,
         day: 'numeric', month: 'numeric', year: 'numeric'
     });
 };
-
-document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-window.addEventListener('resize', () => {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-});
 
 updateDateTime();
 setInterval(updateDateTime, 1000);
@@ -26,7 +21,7 @@ entranceOverlay.addEventListener('click', () => {
     }, 500);
     
     if (audio) {
-        audio.play().catch(error => console.log('Audio playback failed:', error));
+        audio.play();
         document.getElementById('play').textContent = 'pause';
     }
 });
@@ -60,11 +55,7 @@ function initializeAudio() {
     let isPlaying = false;
     
     const togglePlay = () => {
-        if (isPlaying) {
-            audio.pause();
-        } else {
-            audio.play().catch(error => console.log('Audio playback failed:', error));
-        }
+        isPlaying ? audio.pause() : audio.play();
         playBtn.textContent = isPlaying ? 'play' : 'pause';
         isPlaying = !isPlaying;
     };
@@ -73,7 +64,7 @@ function initializeAudio() {
         const song = songs[index];
         audio.src = song.src;
         currentSongEl.textContent = song.title;
-        audio.play().catch(error => console.log('Audio playback failed:', error));
+        audio.play();
         isPlaying = true;
         playBtn.textContent = 'pause';
     };
@@ -101,17 +92,8 @@ function initializeAudio() {
         loadSong(currentSongIndex);
     });
     
-    const handleProgressBarInteraction = (e) => {
+    progressBar.addEventListener('click', (e) => {
         const clickPosition = (e.offsetX / progressBar.offsetWidth);
-        audio.currentTime = clickPosition * audio.duration;
-    };
-    
-    progressBar.addEventListener('click', handleProgressBarInteraction);
-    progressBar.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        const touch = e.touches[0];
-        const rect = progressBar.getBoundingClientRect();
-        const clickPosition = (touch.clientX - rect.left) / progressBar.offsetWidth;
         audio.currentTime = clickPosition * audio.duration;
     });
     
@@ -124,13 +106,4 @@ function initializeAudio() {
     if (songs.length > 0) {
         loadSong(currentSongIndex);
     }
-    
-    // Handle audio context resuming on iOS
-    document.addEventListener('touchstart', function() {
-        if (audio.paused && !isPlaying) {
-            audio.play().catch(error => console.log('Audio playback failed:', error));
-            isPlaying = true;
-            playBtn.textContent = 'pause';
-        }
-    }, {once: true});
 }</script>
