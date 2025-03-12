@@ -188,17 +188,21 @@ function initializeAudio() {
     const currentSongEl = document.getElementById('current-song');
     const currentTimeEl = document.getElementById('current-time');
     
-    const songs = Array.from(document.querySelectorAll('script')).reduce((acc, script) => {
-        const matches = script.textContent.match(/["'](.*?\.mp3)["']/g) || [];
-        matches.forEach(match => {
-            const src = match.replace(/['"]/g, '');
-            acc.push({
-                src: src,
-                title: src.split('/').pop().split('.')[0].replace(/-/g, ' ')
-            });
-        });
-        return acc;
-    }, []);    
+    const songs = [
+        {
+            src: 'audios/handlebars.mp3',
+            title: 'handlebars'
+        },
+        {
+            src: 'audios/saw.mp3',
+            title: 'start a war'
+        },
+        {
+            src: '/audios/wtie.mp3',
+            title: 'with the IE (way up)'
+        }
+    ];
+    
     let currentSongIndex = 0;
     let isPlaying = false;
     
