@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const TOTAL_DURATION = 8771
   const audio = new Audio()
   audio.crossOrigin = "anonymous"
-  audio.src = "nonstoppop.mp3"
+  audio.src = "https://files.catbox.moe/pl1u3x.mp3"
   audio.volume = 1.0
 
   const playBtn = document.getElementById("play")
