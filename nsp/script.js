@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     function shareStation() {
-      const shareText = `I'm listening to ${playlist[currentTrackIndex].title} by ${playlist[currentTrackIndex].artist} on Non Stop Pop FM! Check it out at https://joymura.fun/nsp!`
+      const shareText = `I'm listening to ${playlist[currentTrackIndex].title} by ${playlist[currentTrackIndex].artist} on Non Stop Pop FM! Check it out at https://joymura.fun/nsp `
   
       try {
         navigator.clipboard.writeText(shareText)
